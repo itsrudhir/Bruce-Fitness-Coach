@@ -133,11 +133,4 @@ This fitness assistant:
 • Chat with your AI coach via voice or text.  
 • Log workouts and view history.  
 • Profile & goals persist across sessions.  
-
-Requirements in `requirements.txt`:  
-streamlit  
-groq  
-SpeechRecognition  
-gTTS  
-audio-recorder-streamlit
-''')
+)
