@@ -42,6 +42,23 @@ def clear_memory():
 
     st.success("Memory and workout log have been cleared!")
 
+
+def first_clear_memory():
+    """Clear the memory and workout log files and reset session state."""
+    if os.path.exists(MEMORY_FILE):
+        os.remove(MEMORY_FILE)
+    if os.path.exists(WORKOUT_LOG):
+        os.remove(WORKOUT_LOG)
+    
+    # Reset session state
+    st.session_state.messages = []
+    st.session_state.workouts = []
+    st.session_state.profile = {"age": 25, "weight": 70, "goal": "Maintain fitness"}
+
+    # st.success("Memory and workout log have been cleared!")
+
+
+
 # --- Streamlit Setup ---
 st.set_page_config(page_title="Fitness Assistant", layout="wide")
 st.title("💪 Fitness Assistant with Voice & Memory")
@@ -63,7 +80,7 @@ with st.sidebar.form("profile_form", clear_on_submit=False):
 st.sidebar.subheader("Reset Memory")
 if st.sidebar.button("Clear All Memory"):
     clear_memory()
-clear_memory()
+first_clear_memory()
 # Load or init memory and logs
 if "messages" not in st.session_state:
     st.session_state.messages = load_json(MEMORY_FILE, [])
