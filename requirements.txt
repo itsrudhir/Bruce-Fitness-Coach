@@ -1,6 +1,0 @@
-streamlit
-groq
-speechrecognition
-gTTS
-pyttsx3
-audio-recorder-streamlit
