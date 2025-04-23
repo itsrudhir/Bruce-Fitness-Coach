@@ -27,15 +27,24 @@ def save_json(path, data):
     with open(path, "w") as f:
         json.dump(data, f)
 
+# --- Function to clear memory ---
+def clear_memory():
+    """Clear the memory and workout log files and reset session state."""
+    if os.path.exists(MEMORY_FILE):
+        os.remove(MEMORY_FILE)
+    if os.path.exists(WORKOUT_LOG):
+        os.remove(WORKOUT_LOG)
+    
+    # Reset session state
+    st.session_state.messages = []
+    st.session_state.workouts = []
+    st.session_state.profile = {"age": 25, "weight": 70, "goal": "Maintain fitness"}
+
+    st.success("Memory and workout log have been cleared!")
+
 # --- Streamlit Setup ---
 st.set_page_config(page_title="Fitness Assistant", layout="wide")
 st.title("💪 Fitness Assistant with Voice & Memory")
-
-# Load or init memory and logs
-if "messages" not in st.session_state:
-    st.session_state.messages = load_json(MEMORY_FILE, [])
-if "workouts" not in st.session_state:
-    st.session_state.workouts = load_json(WORKOUT_LOG, [])
 
 # Sidebar: user profile and goals
 st.sidebar.header("Your Profile & Goals")
@@ -49,6 +58,17 @@ with st.sidebar.form("profile_form", clear_on_submit=False):
         st.session_state.profile = {"age": age, "weight": weight, "goal": goal}
         save_json("profile.json", st.session_state.profile)
         st.success("Profile saved.")
+
+# Button to clear all memory
+st.sidebar.subheader("Reset Memory")
+if st.sidebar.button("Clear All Memory"):
+    clear_memory()
+
+# Load or init memory and logs
+if "messages" not in st.session_state:
+    st.session_state.messages = load_json(MEMORY_FILE, [])
+if "workouts" not in st.session_state:
+    st.session_state.workouts = load_json(WORKOUT_LOG, [])
 
 # Tabs for functionality
 tabs = st.tabs(["Chat Coach", "Log Workout", "View Workouts"])
@@ -133,5 +153,4 @@ This fitness assistant:
 • Chat with your AI coach via voice or text.  
 • Log workouts and view history.  
 • Profile & goals persist across sessions.  
-'''
-)
+''')
