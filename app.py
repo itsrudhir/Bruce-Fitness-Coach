@@ -63,7 +63,7 @@ with st.sidebar.form("profile_form", clear_on_submit=False):
 st.sidebar.subheader("Reset Memory")
 if st.sidebar.button("Clear All Memory"):
     clear_memory()
- clear_memory()
+clear_memory()
 # Load or init memory and logs
 if "messages" not in st.session_state:
     st.session_state.messages = load_json(MEMORY_FILE, [])
