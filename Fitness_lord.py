@@ -9,7 +9,8 @@ import io
 from audio_recorder_streamlit import audio_recorder
 
 # --- Configuration ---
-GROQ_API_KEY = const.GROQ_API_KEY
+GROQ_API_KEY =  st.secrets["GROQ_API_KEY"] 
+# const.GROQ_API_KEY
 client = Groq(api_key=GROQ_API_KEY)
 MODEL_NAME = "llama-3.3-70b-versatile"
 MEMORY_FILE = "fitness_memory.json"
