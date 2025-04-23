@@ -1,7 +1,7 @@
 import streamlit as st
 from groq import Groq
 import json, os
-import const
+# import const
 import speech_recognition as sr
 from gtts import gTTS
 import pyttsx3
